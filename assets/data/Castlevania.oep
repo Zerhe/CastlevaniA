@@ -16,7 +16,7 @@
     <Width>25600</Width>
     <Height>240</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Pc\Desktop\CastleOgmo\Castlevania.oep</Filename>
+  <Filename>C:\Users\113\Desktop\CastlevaniA\assets\data\Castlevania.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -53,16 +53,7 @@
   <Tilesets>
     <Tileset>
       <Name>Buildings</Name>
-      <FilePath>Tileset Castlevania.png</FilePath>
-      <TileSize>
-        <Width>16</Width>
-        <Height>16</Height>
-      </TileSize>
-      <TileSep>0</TileSep>
-    </Tileset>
-    <Tileset>
-      <Name>NewTileset0</Name>
-      <FilePath>New Piskel.png</FilePath>
+      <FilePath>..\images\BuildingTileset.png</FilePath>
       <TileSize>
         <Width>16</Width>
         <Height>16</Height>

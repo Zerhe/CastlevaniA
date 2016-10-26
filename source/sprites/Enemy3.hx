@@ -6,27 +6,23 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  * ...
  * @author ...
  */
-class Enemy2 extends BaseEnemies
+class Enemy3 extends BaseEnemies
 {
 	private var counter:Int;
-	private var velMaxY:Float;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(16, 16, 0xFF00FF00);
+		makeGraphic(16, 32, 0xFF0000FF);
 		counter = 0;
-		velMaxY = 80;
-		velocity.y = velMaxY * -1;
+		acceleration.y = Reg.AccGravedad;
 	}
-	override public function move() 
+	override public function update(elapsed:Float):Void 
 	{
-		super.move();
+		super.update(elapsed);
 		counter++;
-		velocity.x = -100;
-		if (counter == 20)
+		if (counter == 60)
 		{
-			velMaxY *= -1;
-			velocity.y = velMaxY;
+			Reg.enemyBullets.add(new EnemyBullet(x, y));
 			counter = 0;
 		}
 	}

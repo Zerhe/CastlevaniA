@@ -1,24 +1,25 @@
 package sprites;
 
+import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-import flixel.FlxG;
 
 /**
  * ...
  * @author ...
  */
-class Enemy1 extends BaseEnemies
+class EnemyBullet extends FlxSprite
 {
-	private var coliPiso:Bool;
+	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(16, 32);
+		makeGraphic(5, 5);
 		acceleration.y = Reg.AccGravedad;
+		velocity.y = -300;
 	}
-	override public function move() 
+	override public function update(elapsed:Float):Void 
 	{
-		super.move();
-		x -= 80 * FlxG.elapsed;
+		super.update(elapsed);
+		velocity.x = -100;
 	}
 }

@@ -12,6 +12,7 @@ import flixel.tile.FlxTilemap;
 import sprites.Ataque;
 import sprites.Enemy1;
 import sprites.Enemy2;
+import sprites.Enemy3;
 import sprites.Piso;
 import sprites.Player;
 import flixel.addons.display.FlxBackdrop;
@@ -23,6 +24,7 @@ class PlayState extends FlxState
 	private var fondo:FlxBackdrop;
 	private var enemy:Enemy1;
 	private var enemy2:Enemy2;
+	private var enemy3:Enemy3;
 	private var ataque:Ataque;
 	
 	override public function create():Void
@@ -44,10 +46,13 @@ class PlayState extends FlxState
 
 		enemy = new Enemy1(200, 0);
 		add(enemy);
-		enemy2 = new Enemy2(100, 100);
+		enemy2 = new Enemy2(FlxG.width, 150);
 		add(enemy2);
+		enemy3 = new Enemy3(100, 100);
+		add(enemy3);
 		ataque = new Ataque(32, 32);
 		add(ataque);
+		add(Reg.enemyBullets);
 		ataque.kill();
 	}
 
@@ -66,11 +71,27 @@ class PlayState extends FlxState
 			ataque.kill();	
 		FlxG.collide(player, tilemap);
 		FlxG.collide(enemy, tilemap);
+		FlxG.collide(enemy3, tilemap);
+		FlxG.collide(Reg.enemyBullets, tilemap);
 		if (FlxG.overlap(enemy, ataque))
 			enemy.destroy();
+			
 		if (FlxG.pixelPerfectOverlap(player, enemy))
-			trace("se murio");
+			player.kill();
+		if (FlxG.pixelPerfectOverlap(player, enemy2))
+			player.kill();
+			
+		//No se porque tienen que estar los dos if para que ande, no tengo idea de porque, si saco alguno deja de colisionar
+		//
+		if (FlxG.collide(player,Reg.enemyBullets)){}
+		for (i in 0...Reg.enemyBullets.length)
+		{
+			if (FlxG.collide(player,Reg.enemyBullets.members[i]))
+				player.kill();
+		}
+		//
 		if (FlxG.keys.pressed.R)
 			FlxG.resetState();
 	}
+	
 }

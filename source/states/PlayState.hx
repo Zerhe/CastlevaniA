@@ -11,6 +11,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import sprites.Ataque;
 import sprites.Enemy1;
+import sprites.Enemy2;
 import sprites.Piso;
 import sprites.Player;
 import flixel.addons.display.FlxBackdrop;
@@ -21,6 +22,7 @@ class PlayState extends FlxState
 	private var tilemap:FlxTilemap;
 	private var fondo:FlxBackdrop;
 	private var enemy:Enemy1;
+	private var enemy2:Enemy2;
 	private var ataque:Ataque;
 	
 	override public function create():Void
@@ -32,7 +34,7 @@ class PlayState extends FlxState
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.LevelOne__oel);
 		tilemap = loader.loadTilemap(AssetPaths.BuildingTileset__png, 16, 16, "Buildings");
 		tilemap.setTileProperties(0, FlxObject.NONE);
-		for (i in 0...348)
+		for (i in 1...348)
 			tilemap.setTileProperties(i, FlxObject.ANY);
 		add(tilemap);
 		
@@ -42,6 +44,8 @@ class PlayState extends FlxState
 
 		enemy = new Enemy1(200, 0);
 		add(enemy);
+		enemy2 = new Enemy2(100, 100);
+		add(enemy2);
 		ataque = new Ataque(32, 32);
 		add(ataque);
 		ataque.kill();
@@ -59,21 +63,9 @@ class PlayState extends FlxState
 			ataque.y = Reg.playerY + 10;
 		}
 		else 
-			ataque.kill();
-			
+			ataque.kill();	
 		FlxG.collide(player, tilemap);
 		FlxG.collide(enemy, tilemap);
-		//if (FlxG.overlap(player, piso) && player.getSalto() == false)
-		//{
-			//player.velocity.y = 0;
-			//Reg.coliPiso = true;
-		//}
-		//else 
-			//Reg.coliPiso = false;
-		//if (FlxG.overlap(enemy, piso))
-			//enemy.OnFloor(true);
-		//else
-			//enemy.OnFloor(false);
 		if (FlxG.overlap(enemy, ataque))
 			enemy.destroy();
 		if (FlxG.pixelPerfectOverlap(player, enemy))

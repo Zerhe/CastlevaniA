@@ -14,18 +14,11 @@ class Enemy1 extends BaseEnemies
 	{
 		super(X, Y, SimpleGraphic);
 		makeGraphic(16, 32);
+		acceleration.y = Reg.AccGravedad;
 	}
 	override public function move() 
 	{
 		super.move();
 		x -= 100 * FlxG.elapsed;
-		if (!coliPiso)
-			velocity.y = Reg.Approach(velocity.y, VYMax, GravityNorm);
-		else
-			velocity.y = 0;
-	}
-	public function OnFloor(value:Bool):Void
-	{
-		coliPiso = value;
 	}
 }

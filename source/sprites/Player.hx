@@ -3,7 +3,7 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-
+import flixel.FlxObject;
 /**
  * ...
  * @author ...
@@ -11,7 +11,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class Player extends FlxSprite
 {
 	private var Move:Float = 0;
-	private var Multiplier:Float = 12.0;
+	private var Multiplier:Float = 20.0;
 	private var VYMax:Float;
 	private var VXMax:Float;
 	private var JumpHeight:Float;
@@ -26,7 +26,7 @@ class Player extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		loadGraphic(AssetPaths.Player__png, true, 16, 32);
-		VYMax       = 11    * Multiplier;
+		VYMax       = 11   * Multiplier;
 		VXMax       = 6.5  * Multiplier;
 		JumpHeight  = 8    * Multiplier;
 		GravityNorm = 0.5  * Multiplier;
@@ -35,17 +35,16 @@ class Player extends FlxSprite
 		AirAcc      = 0.75 * Multiplier;
 		AirFric     = 0.1  * Multiplier;
 		
+		acceleration.y = Reg.AccGravedad;
+		
 	}
 	override public function update(elapsed:Float):Void
-	{
-		super.update(elapsed);
-		
-		
+	{	
 		if (FlxG.keys.pressed.LEFT) 
 			x -= 100 * FlxG.elapsed;
 		if (FlxG.keys.pressed.RIGHT) 
 			x += 100 * FlxG.elapsed;
-		if (FlxG.keys.pressed.UP && Reg.coliPiso)
+		if (FlxG.keys.pressed.UP && isTouching(FlxObject.FLOOR))
 		{
 			velocity.y = -VYMax;
 			animation.add("move", [1, 2], 5, true);
@@ -59,14 +58,7 @@ class Player extends FlxSprite
 			salto = false;
 			animation.stop();
 		}
-		
-		if  (!Reg.coliPiso)
-		{
-			velocity.y = Reg.Approach(velocity.y, VYMax, GravityNorm); //Caida libre
-		}
-		//if (salto == true && velocity.y == 0) 
-			//velocity.y = -VYMax;
-		
+		super.update(elapsed);
 	}
 	public function getSalto(): Bool
 	{

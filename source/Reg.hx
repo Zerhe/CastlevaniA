@@ -8,7 +8,7 @@ import sprites.EnemyBullet;
  */
 class Reg
 {
-	static public var coliPiso:Bool = false;
+	//static public var coliPiso:Bool = false;
 	static public var playerX:Float = 0;
 	static public var playerY:Float = 0;
 	static public var AccGravedad:Float = 700;

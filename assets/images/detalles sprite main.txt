@@ -1,0 +1,5 @@
+Tamaño sprite: 24x46
+0:Idle a la derecha
+1:Idle a la izquierda
+2-8: Movimiento a la derecha
+9-15: Movimiento a la izquierda

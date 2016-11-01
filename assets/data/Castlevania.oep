@@ -86,10 +86,13 @@
         <X>0</X>
         <Y>0</Y>
       </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="..\images\PlataformaCastle (1).png" Tiled="true">
+      <ImageDefinition DrawMode="Image" ImagePath="..\images\PlataformaCastleH.png" Tiled="true">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
-      <ValueDefinitions />
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="IntValueDefinition" Name="Counter" Default="0" Min="0" Max="96" ShowSlider="false" />
+        <ValueDefinition xsi:type="BoolValueDefinition" Name="direcction" Default="true" />
+      </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
     <EntityDefinition Name="PlatformV" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
@@ -104,7 +107,9 @@
       <ImageDefinition DrawMode="Image" ImagePath="..\images\PlatformCastleV.png" Tiled="true">
         <RectColor A="255" R="255" G="0" B="0" />
       </ImageDefinition>
-      <ValueDefinitions />
+      <ValueDefinitions>
+        <ValueDefinition xsi:type="IntValueDefinition" Name="Counter" Default="0" Min="0" Max="128" ShowSlider="false" />
+      </ValueDefinitions>
       <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
     </EntityDefinition>
   </EntityDefinitions>

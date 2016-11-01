@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
@@ -14,6 +15,7 @@ import sprites.Enemy1;
 import sprites.Enemy2;
 import sprites.Enemy3;
 import sprites.Piso;
+import sprites.PlatformH;
 import sprites.Player;
 import flixel.addons.display.FlxBackdrop;
 import flixel.FlxCamera;
@@ -27,6 +29,22 @@ class PlayState extends FlxState
 	private var enemy2:Enemy2;
 	private var enemy3:Enemy3;
 	private var ataque:Ataque;
+	
+	private var platGroupH:FlxTypedGroup<PlatformH>;
+	
+	
+	public  function entityCreator(name:String, data:Xml):Void
+	{	
+		var startX:Float =  Std.parseFloat(data.get("x"));
+		var startY:Float = Std.parseFloat(data.get("y"));
+		switch (name)
+		{
+			case "platformH":
+				platGroupH.add(new PlatformH(Std.parseInt(data.get("counter")),data.get("direcction"),startX, startY));
+			case "platformV":	
+		}
+		
+	}
 	
 	override public function create():Void
 	{
@@ -55,6 +73,15 @@ class PlayState extends FlxState
 		add(ataque);
 		add(Reg.enemyBullets);
 		ataque.kill();
+		
+		platGroupH = new FlxTypedGroup<PlatformH>();
+
+		add(platGroupH);
+		
+		FlxG.camera.follow(player);
+		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
+		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
+		loader.loadEntities(entityCreator, "Entities");
 	}
 
 	override public function update(elapsed:Float):Void
@@ -65,7 +92,7 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.justPressed.P){
 			ataque.revive();
-			switch(player.getDireAtq()){
+			switch(player.getDirec()){
 			case true:
 				ataque.x = Reg.playerX + 15;
 				ataque.y = Reg.playerY + 10;
@@ -87,10 +114,10 @@ class PlayState extends FlxState
 		if (FlxG.overlap(enemy3, ataque))
 			enemy3.destroy();
 			
-		//if (FlxG.pixelPerfectOverlap(player, enemy))
-			//player.kill();
-		//if (FlxG.pixelPerfectOverlap(player, enemy2))
-			//player.kill();
+		if (FlxG.pixelPerfectOverlap(player, enemy))
+			player.kill();
+		if (FlxG.pixelPerfectOverlap(player, enemy2))
+			player.kill();
 			
 		//No se porque tienen que estar los dos if para que ande, no tengo idea de porque, si saco alguno deja de colisionar
 		//

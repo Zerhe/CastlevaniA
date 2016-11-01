@@ -16,21 +16,25 @@ class Player extends FlxSprite
 	//private var VXMax:Float;
 	//private var GravityNorm:Float;
 	private var salto:Bool = false;
-	private var direAtq = true;
+	private var direc = true;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		loadGraphic(AssetPaths.Player__png, true, 16, 32);
+		loadGraphic(AssetPaths.main__png, true, 24, 46);
+		animation.add("idle", [0], 1, true);
+		animation.add("runR", [2, 3, 4, 5, 6, 7, 8], 5, true);
+		animation.add("runL", [9, 10, 11, 12, 13, 14, 15], 5, true);
 		VYMax       = 11   * Multiplier;
-		//VXMax       = 6.5  * Multiplier;
-		//GravityNorm = 0.5  * Multiplier;
+
 		
 		acceleration.y = Reg.AccGravedad;
+		
 		
 	}
 	override public function update(elapsed:Float):Void
 	{	
+		animation.play("idle");
 		if (isTouching(FlxObject.FLOOR))
 		{
 			velocity.x = 0;
@@ -39,12 +43,14 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT && !salto)
 		{
 			x -= 100 * FlxG.elapsed;
-			direAtq = false;
+			direc = false;
+			animation.play("runL");
 		}
 		if (FlxG.keys.pressed.RIGHT && !salto) 
 		{
 			x += 100 * FlxG.elapsed;
-			direAtq = true;
+			direc = true;
+			animation.play("runR");
 		}	
 		if (FlxG.keys.pressed.UP && FlxG.keys.pressed.RIGHT && isTouching(FlxObject.FLOOR))
 		{	
@@ -75,8 +81,8 @@ class Player extends FlxSprite
 		*/
 		super.update(elapsed);
 	}
-	public function getDireAtq(): Bool
+	public function getDirec(): Bool
 	{
-		return direAtq;
+		return direc;
 	}	
 }

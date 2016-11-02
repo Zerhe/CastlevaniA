@@ -14,11 +14,13 @@ import sprites.Ataque;
 import sprites.Enemy1;
 import sprites.Enemy2;
 import sprites.Enemy3;
+import sprites.Enemy4;
 import sprites.Piso;
 import sprites.PlatformH;
 import sprites.Player;
 import flixel.addons.display.FlxBackdrop;
 import flixel.FlxCamera;
+import sprites.TheBoss;
 
 class PlayState extends FlxState
 {
@@ -28,6 +30,8 @@ class PlayState extends FlxState
 	private var enemy:Enemy1;
 	private var enemy2:Enemy2;
 	private var enemy3:Enemy3;
+	private var enemy4:Enemy4;
+	private var boss:TheBoss;
 	private var ataque:Ataque;
 	
 	private var platGroupH:FlxTypedGroup<PlatformH>;
@@ -69,6 +73,10 @@ class PlayState extends FlxState
 		add(enemy2);
 		enemy3 = new Enemy3(100, 100);
 		add(enemy3);
+		enemy4 = new Enemy4(110, 100);
+		add(enemy4);
+		boss = new TheBoss(200, 60);
+		add(boss);
 		ataque = new Ataque(32, 32);
 		add(ataque);
 		add(Reg.enemyBullets);
@@ -95,10 +103,10 @@ class PlayState extends FlxState
 			switch(player.getDirec()){
 			case true:
 				ataque.x = Reg.playerX + 15;
-				ataque.y = Reg.playerY + 10;
+				ataque.y = Reg.playerY + 40;
 			case false:
 				ataque.x = Reg.playerX - 15;
-				ataque.y = Reg.playerY + 10;
+				ataque.y = Reg.playerY + 40;
 			}
 		}
 		else 
@@ -106,6 +114,7 @@ class PlayState extends FlxState
 		FlxG.collide(player, tilemap);
 		FlxG.collide(enemy, tilemap);
 		FlxG.collide(enemy3, tilemap);
+		FlxG.collide(enemy4, tilemap);
 		FlxG.collide(Reg.enemyBullets, tilemap);
 		if (FlxG.overlap(enemy, ataque))
 			enemy.destroy();
@@ -113,15 +122,15 @@ class PlayState extends FlxState
 			enemy2.destroy();
 		if (FlxG.overlap(enemy3, ataque))
 			enemy3.destroy();
-			
+		/*	
 		if (FlxG.pixelPerfectOverlap(player, enemy))
 			player.kill();
 		if (FlxG.pixelPerfectOverlap(player, enemy2))
 			player.kill();
-			
+		*/	
 		//No se porque tienen que estar los dos if para que ande, no tengo idea de porque, si saco alguno deja de colisionar
 		//
-		if (FlxG.collide(player,Reg.enemyBullets)){}
+		//if (FlxG.collide(player,Reg.enemyBullets)){}
 		for (i in 0...Reg.enemyBullets.length)
 		{
 			if (FlxG.overlap(player,Reg.enemyBullets.members[i]))

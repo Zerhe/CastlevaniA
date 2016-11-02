@@ -37,6 +37,7 @@ class Player extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	{	
+		Reg.playerDirec = direc;
 		movement();
 		if (!puedeDisparar)
 			laserCounter++;

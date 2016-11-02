@@ -16,7 +16,7 @@
     <Width>25600</Width>
     <Height>240</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Pc\Desktop\Image\Proyectos\CastlevaniA\assets\data\Castlevania.oep</Filename>
+  <Filename>C:\Users\113\Desktop\CastlevaniA\assets\data\Castlevania.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -26,6 +26,18 @@
   <ExportCameraPosition>true</ExportCameraPosition>
   <LevelValueDefinitions />
   <LayerDefinitions>
+    <LayerDefinition xsi:type="TileLayerDefinition">
+      <Name>Background</Name>
+      <Grid>
+        <Width>256</Width>
+        <Height>240</Height>
+      </Grid>
+      <ScrollFactor>
+        <X>1</X>
+        <Y>1</Y>
+      </ScrollFactor>
+      <ExportMode>CSV</ExportMode>
+    </LayerDefinition>
     <LayerDefinition xsi:type="TileLayerDefinition">
       <Name>Buildings</Name>
       <Grid>
@@ -57,6 +69,15 @@
       <TileSize>
         <Width>16</Width>
         <Height>16</Height>
+      </TileSize>
+      <TileSep>0</TileSep>
+    </Tileset>
+    <Tileset>
+      <Name>Background</Name>
+      <FilePath>..\images\Background.png</FilePath>
+      <TileSize>
+        <Width>256</Width>
+        <Height>240</Height>
       </TileSize>
       <TileSep>0</TileSep>
     </Tileset>

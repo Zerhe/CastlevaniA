@@ -3,6 +3,7 @@ package sprites;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import Reg;
 
 /**
  * ...
@@ -22,28 +23,30 @@ class TheBoss extends FlxSprite
 		super.update(elapsed);
 		timer++;
 		trace(timer);
-		trace(Reg.playerDirec);
+		trace(Reg.playerDirec);	
+		
 		switch (timer){
-			case 300:
+			case 200:
 				switch(Reg.playerDirec){
 					case true:
 						x = Reg.playerX - 40 - width;
 					case false:
 						x = Reg.playerX + 56;		
 			}
-		
-		case 400:
-			Reg.enemyBossBullets.add(new EnemyBullet(x, y));
-		case 420:
-			Reg.enemyBossBullets.add(new EnemyBullet(x, y));
-		case 440:
-			Reg.enemyBossBullets.add(new EnemyBullet(x, y));
-		case 460:
-			Reg.enemyBossBullets.add(new EnemyBullet(x, y));
-		case 480:
-			Reg.enemyBossBullets.add(new EnemyBullet(x, y));
-		if (timer == 500)
-			timer = 0;
+			case 400:
+				Reg.BossBullets.members[0] = new EnemyBullet(x + width / 2, y);
+				Reg.BossBullets.members[0].boss();
+				Reg.BossBullets.add(Reg.BossBullets.members[0]);
+			case 450:
+				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+			case 500:
+				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+			case 550:
+				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+			case 600:
+				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+			case 700:
+				timer = 0;
 		}
 	}
 }

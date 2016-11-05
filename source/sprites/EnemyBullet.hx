@@ -16,10 +16,23 @@ class EnemyBullet extends FlxSprite
 		makeGraphic(5, 5);
 		acceleration.y = Reg.AccGravedad;
 		velocity.y = -300;
+		velocity.x = direBala();
 	}
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		velocity.x = -100;
+	}
+	public function direBala():Int
+	{
+		if (Reg.playerX > x)
+			return 100;
+		else 
+			return -100;
+	}
+	public function boss()
+	{
+		makeGraphic(16, 16);
+		velocity.y = -500;
+		
 	}
 }

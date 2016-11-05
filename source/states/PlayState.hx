@@ -80,6 +80,7 @@ class PlayState extends FlxState
 		add(boss);
 		add(Reg.ataque);
 		add(Reg.enemyBullets);
+		add(Reg.BossBullets);
 		add(Reg.laserGroup);
 
 		

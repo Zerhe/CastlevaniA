@@ -27,7 +27,9 @@ class PlayState extends FlxState
 {
 	private var player:Player;
 	private var tilemap:FlxTilemap;
-	private var fondo:FlxBackdrop;
+	private var fondoTilemap:FlxTilemap;
+	private var fondo2Tilemap:FlxTilemap;
+
 	private var enemy:Enemy1;
 	private var enemy2:Enemy2;
 	private var enemy3:Enemy3;
@@ -55,16 +57,20 @@ class PlayState extends FlxState
 	{
 		super.create();
 		FlxG.mouse.visible = false;
-		fondo = new FlxBackdrop(AssetPaths.Fondo__png, 1, 0, true, false);
-		add(fondo);
+		
+	
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.LevelOne__oel);
+		fondoTilemap = loader.loadTilemap(AssetPaths.Background__png, 256, 240, "Background");
+		add(fondoTilemap);
+		fondo2Tilemap = loader.loadTilemap(AssetPaths.BackgroundLab__png, 256, 240, "BackgroundLab");
+		add(fondo2Tilemap);
 		tilemap = loader.loadTilemap(AssetPaths.BuildingTileset__png, 16, 16, "Buildings");
 		tilemap.setTileProperties(0, FlxObject.NONE);
 		for (i in 1...348)
 			tilemap.setTileProperties(i, FlxObject.ANY);
 		add(tilemap);
-		
+
 		
 		player = new Player(32, 32);
 		add(player);

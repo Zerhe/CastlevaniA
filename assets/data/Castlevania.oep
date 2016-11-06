@@ -5,7 +5,7 @@
   <BackgroundColor A="255" R="0" G="255" B="0" />
   <GridColor A="255" R="255" G="0" B="255" />
   <LevelDefaultSize>
-    <Width>5120</Width>
+    <Width>5376</Width>
     <Height>240</Height>
   </LevelDefaultSize>
   <LevelMinimumSize>
@@ -16,9 +16,9 @@
     <Width>25600</Width>
     <Height>240</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\113\Desktop\CastlevaniA\assets\data\Castlevania.oep</Filename>
+  <Filename>C:\Users\Pc\Desktop\Image\Proyectos\CastlevaniA\assets\data\Castlevania.oep</Filename>
   <AngleMode>Radians</AngleMode>
-  <CameraEnabled>true</CameraEnabled>
+  <CameraEnabled>false</CameraEnabled>
   <CameraSize>
     <Width>256</Width>
     <Height>240</Height>
@@ -28,6 +28,18 @@
   <LayerDefinitions>
     <LayerDefinition xsi:type="TileLayerDefinition">
       <Name>Background</Name>
+      <Grid>
+        <Width>256</Width>
+        <Height>240</Height>
+      </Grid>
+      <ScrollFactor>
+        <X>1</X>
+        <Y>1</Y>
+      </ScrollFactor>
+      <ExportMode>CSV</ExportMode>
+    </LayerDefinition>
+    <LayerDefinition xsi:type="TileLayerDefinition">
+      <Name>BackgroundLab</Name>
       <Grid>
         <Width>256</Width>
         <Height>240</Height>
@@ -75,6 +87,15 @@
     <Tileset>
       <Name>Background</Name>
       <FilePath>..\images\Background.png</FilePath>
+      <TileSize>
+        <Width>256</Width>
+        <Height>240</Height>
+      </TileSize>
+      <TileSep>0</TileSep>
+    </Tileset>
+    <Tileset>
+      <Name>BackgroundLab</Name>
+      <FilePath>..\images\BackgroundLab.png</FilePath>
       <TileSize>
         <Width>256</Width>
         <Height>240</Height>

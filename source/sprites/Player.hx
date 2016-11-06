@@ -20,6 +20,7 @@ class Player extends FlxSprite
 	private var laserAmmo:Int = 3; 
 	private var laserCounter:Int = 0;
 	private var puedeDisparar:Bool = true;
+	public var asd:String;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);

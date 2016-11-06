@@ -3,6 +3,7 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.FlxSubState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -39,6 +40,10 @@ class PlayState extends FlxState
 	private var platGroupH:FlxTypedGroup<PlatformH>;
 	private var platGroupV:FlxTypedGroup<PlatformV>;
 	
+	private var transportador:FlxSprite;
+	private var bossSubState:FlxSubState;
+	private var bossLevel:BossState;
+	
 	public  function entityCreator(name:String, data:Xml):Void
 	{	
 		var startX:Float =  Std.parseFloat(data.get("x"));
@@ -58,7 +63,7 @@ class PlayState extends FlxState
 		super.create();
 		FlxG.mouse.visible = false;
 		
-	
+		bossSubState = new FlxSubState(0x00000000);
 		
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.LevelOne__oel);
 		fondoTilemap = loader.loadTilemap(AssetPaths.Background__png, 256, 240, "Background");
@@ -98,6 +103,11 @@ class PlayState extends FlxState
 		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
 		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
 		loader.loadEntities(entityCreator, "Entities");
+		
+		
+		transportador = new FlxSprite(256, 80);
+		transportador.makeGraphic(40, 40, 0xFF991345);
+		add(transportador);
 	}
 
 	override public function update(elapsed:Float):Void
@@ -132,7 +142,7 @@ class PlayState extends FlxState
 			enemy2.destroy();
 		if (FlxG.overlap(enemy3, Reg.ataque))
 			enemy3.destroy();
-			
+		player.asd = "ssssssssssssss";
 		//if (FlxG.pixelPerfectOverlap(player, enemy))
 			//player.kill();
 		//if (FlxG.pixelPerfectOverlap(player, enemy2))
@@ -149,6 +159,14 @@ class PlayState extends FlxState
 		//
 		if (FlxG.keys.pressed.R) // nose porque crashea al darle reset :'v
 			FlxG.resetState();
+			
+		if (FlxG.overlap(player, transportador))
+		{
+			Reg.playerAux = player;
+			
+			openSubState(bossLevel);
+			FlxG.switchState(new BossState());
+		}
 	}
 	
 	private function aplasta(p:Player, v:PlatformV):Void

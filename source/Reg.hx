@@ -3,6 +3,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import sprites.EnemyBullet;
 import sprites.Laser;
 import sprites.Ataque;
+import sprites.Player;
 /**
  * ...
  * @author ...
@@ -18,7 +19,7 @@ class Reg
 	static public var BossBullets:FlxTypedGroup<EnemyBullet> = new FlxTypedGroup<EnemyBullet>();
 	static public var laserGroup:FlxTypedGroup<Laser> = new FlxTypedGroup<Laser>();
 	static public var ataque:Ataque = new Ataque(32, 32);
-	
+	static public var playerAux:Player;
 	static public function Approach (a:Float, b:Float, c:Float)
 	{
 		if (a < b)

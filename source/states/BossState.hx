@@ -8,12 +8,16 @@ import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import sprites.Player;
 import flixel.FlxG;
+import flixel.ui.FlxBar;
+import flixel.text.FlxText;
 class BossState extends FlxSubState
 {
 	private var loader:FlxOgmoLoader;
 	private var tilemap:FlxTilemap;
 	private var player:Player;
 	private var fondo:FlxSprite;
+	private var healthBar:FlxBar;
+	private var laserText:FlxText;
 	override public function create():Void 
 	{
 		super.create();
@@ -29,18 +33,27 @@ class BossState extends FlxSubState
 		for (i in 1...50) 
 			tilemap.setTileProperties(i, FlxObject.ANY);
 		add(tilemap);
+		Reg.tileWidth = tilemap.width;
 		player = new Player();
-		player = Reg.playerAux;
-		player.y = 50;
+		player.y = 0-player.height;
 		player.x = 50;
+		player.setLaserAmmo(Reg.laserAmmo);
+		player.health = Reg.playerHealth;
 		add(player);
-		trace(player.asd);
+		healthBar = new FlxBar(10, 10);
+		healthBar.parent = player;
+		healthBar.parentVariable = "health";
+		add(healthBar);
+		laserText = new FlxText(0,20);
+		add(laserText);
 	}
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
+	
+		healthBar.x = FlxG.camera.scroll.x + 5;
+		laserText.x = FlxG.camera.scroll.x + 5;
+		laserText.text = "Laser Ammo: " + player.getLaserAmmo();
 		FlxG.collide(player, tilemap);
-		trace(player.x);
-		trace(player.y);
 	}
 }

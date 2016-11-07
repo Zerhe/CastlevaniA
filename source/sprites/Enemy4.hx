@@ -38,7 +38,6 @@ class Enemy4 extends BaseEnemies
 			velocity.y = -VYMax;
 			velocity.x = -100;
 			saltoIzq = false;
-			trace("asd");
 		}
 		if (saltoDer == true) {
 			salto = true;	

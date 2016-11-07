@@ -15,11 +15,20 @@ class PickUp extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		tipo = FlxG.random.int(0, 3);
-		makeGraphic(10, 10);
+		switch(tipo)
+		{
+			case 0:
+				loadGraphic(AssetPaths.HealthPU__png, false, 10, 10);
+			case 1:
+				makeGraphic(10, 10);
+			case 2:
+				loadGraphic(AssetPaths.LaserPU__png, false, 10, 10);
+		}
+		acceleration.y = Reg.AccGravedad/2;
 	}
-	override public function kill(p:Player):Void 
+	public function agarrar(p:Player):Void 
 	{
 		p.agarrarPickUp(tipo);
-		super.kill();
+		destroy();
 	}
 }

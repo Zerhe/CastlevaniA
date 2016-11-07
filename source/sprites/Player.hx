@@ -20,7 +20,10 @@ class Player extends FlxSprite
 	private var laserAmmo:Int = 3; 
 	private var laserCounter:Int = 0;
 	private var puedeDisparar:Bool = true;
-	public var asd:String;
+	private var invulnerable:Bool = false;
+	private var invulCounter:Int = 0;
+	private var invulEfectCounter:Int = 0;
+	private var contained:Bool = false;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -39,20 +42,25 @@ class Player extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{	
 		Reg.playerDirec = direc;
-		movement();
-		if (!puedeDisparar)
-			laserCounter++;
-		if (laserCounter == 30)
+		movement();	
+		if (!invulnerable) 
 		{
-			laserCounter = 0;
-			puedeDisparar = true;
+			if (!puedeDisparar)
+				laserCounter++;
+			if (laserCounter == 30)
+			{
+				laserCounter = 0;
+				puedeDisparar = true;
+			}
+			if (FlxG.keys.pressed.SPACE && laserAmmo > 0 && puedeDisparar) 
+			{
+				Reg.laserGroup.add(new Laser(direc, x, y+20));
+				puedeDisparar = false;
+				laserAmmo--;
+			}			
 		}
-		if (FlxG.keys.pressed.SPACE && laserAmmo > 0 && puedeDisparar) 
-		{
-			Reg.laserGroup.add(new Laser(direc, x, y+5));
-			puedeDisparar = false;
-			laserAmmo--;
-		}
+		else 
+			invulEffect();
 		super.update(elapsed); 
 	}
 	public function getDirec(): Bool
@@ -71,7 +79,7 @@ class Player extends FlxSprite
 						health -= (health - 100);
 				}
 			case 1:
-				Reg.ataque.agrandar();
+				//Reg.ataque.agrandar();
 			case 2:
 				laserAmmo += 5;
 		}
@@ -91,27 +99,36 @@ class Player extends FlxSprite
 			salto = true;
 		if (FlxG.keys.pressed.LEFT && !salto)
 		{
-			velocity.x -= 100;
+			if (x <= 0)
+				velocity.x = 0;
+			else
+				velocity.x -= 100;
 			direc = false;
 			animation.play("runL");
 		}
 		if (FlxG.keys.pressed.RIGHT && !salto) 
 		{
-			velocity.x += 100; 
+			if (x > (Reg.tileWidth-this.width))
+				velocity.x = 0;
+			else
+				velocity.x += 100; 
 			direc = true;
 			animation.play("runR");
 		}	
 		if (FlxG.keys.pressed.UP && FlxG.keys.pressed.RIGHT && isTouching(FlxObject.FLOOR))
 		{	
 			velocity.y = -VYMax;
-			velocity.x = 100;
+			if (x > (Reg.tileWidth-this.width))
+				velocity.x = 0;
 			salto = true;
 			animation.play("crouchR");
 		}
 		else if (FlxG.keys.pressed.UP && FlxG.keys.pressed.LEFT && isTouching(FlxObject.FLOOR))
 		{	
 			velocity.y = -VYMax;
-			velocity.x = -100;
+			if (x <= 0)
+				velocity.x = 0;
+
 			salto = true;
 			animation.play("crouchL");
 		}
@@ -141,5 +158,49 @@ class Player extends FlxSprite
 					animation.play("idleL");
 			}
 		}
+		if (x <= 0 && salto)
+			velocity.x = 0;
+		if (x > (Reg.tileWidth - width) && salto)
+			velocity.x = 0;
 	}
+	public function invulEffect():Void
+	{
+		invulCounter++;
+		invulEfectCounter++;
+		if (invulEfectCounter == 10) 
+		{
+			visible = !visible;
+			invulEfectCounter = 0;
+		}
+		if (invulCounter == 160) 
+		{
+			visible = true;
+			invulEfectCounter = 0;
+			invulCounter = 0;
+			invulnerable = false;
+		}		
+	}
+	public function daniar():Void
+	{
+		if (!invulnerable)
+		{
+			health -= 5;
+			invulnerable = true;	
+		}
+	}
+	
+	public function getLaserAmmo():Int 
+	{
+		return laserAmmo;
+	}
+	public function setLaserAmmo(value:Int):Void
+	{
+		laserAmmo = value;
+	}
+	public function setContained(value:Bool):Void
+	{
+		contained = value;
+	}
+	
+	
 }

@@ -22,8 +22,8 @@ class TheBoss extends FlxSprite
 	{
 		super.update(elapsed);
 		timer++;
-		trace(timer);
-		trace(Reg.playerDirec);	
+		//trace(timer);
+		//trace(Reg.playerDirec);	
 		
 		switch (timer){
 			case 200:

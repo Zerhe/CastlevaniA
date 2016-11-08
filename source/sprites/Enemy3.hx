@@ -12,7 +12,9 @@ class Enemy3 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(16, 32, 0xFF0000FF);
+		loadGraphic(AssetPaths.Enemy3__png, true, 32, 32);
+		animation.add("idle", [0, 1], 8, true);
+		animation.play("idle");
 		counter = 0;
 		acceleration.y = Reg.AccGravedad;
 	}

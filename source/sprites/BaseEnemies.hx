@@ -29,6 +29,7 @@ class BaseEnemies extends FlxSprite
 	public function move(){};
 	public function loMataron():Void
 	{
+		FlxG.sound.play(AssetPaths.explosion__wav);
 		killed = true;
 		kill();
 	}

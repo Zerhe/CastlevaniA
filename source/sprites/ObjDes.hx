@@ -28,6 +28,7 @@ class ObjDes extends FlxSprite
 	public function destruir():Void 
 	{
 		Reg.pickUpGroup.add(new PickUp(x, y));
+		FlxG.sound.play(AssetPaths.explosion__wav);
 		destroy();
 	}
 }

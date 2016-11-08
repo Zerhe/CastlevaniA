@@ -19,6 +19,8 @@ class Reg
 	static public var playerX:Float;
 	static public var playerY:Float;
 	static public var playerHealth:Float;
+	static public var playerCrouch:Bool;
+	static public var playerSalto:Bool;
 	static public var laserAmmo:Int;
 	static public var AccGravedad:Float;/*= 700;*/
 	static public var enemyBullets:FlxTypedGroup<EnemyBullet>; /*= new FlxTypedGroup<EnemyBullet>();*/

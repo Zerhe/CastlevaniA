@@ -5,10 +5,7 @@ import flixel.FlxG;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxObject;
 import flixel.FlxCamera;
-/**
- * ...
- * @author ...
- */
+import flixel.system.FlxSound;
 class Player extends FlxSprite
 {
 	private var Multiplier:Float = 20.0;
@@ -16,6 +13,7 @@ class Player extends FlxSprite
 	private var salto:Bool = false;
 	private var direc = true;
 	private var crouch:Bool = false;
+	private var atacando:Bool = false;
 	private var pickUp:Int = -1;
 	private var laserAmmo:Int = 3; 
 	private var laserCounter:Int = 0;
@@ -24,25 +22,35 @@ class Player extends FlxSprite
 	private var invulCounter:Int = 0;
 	private var invulEfectCounter:Int = 0;
 	private var contained:Bool = false;
+	private var soundCounter:Int = 0;
+	private var runSound:FlxSound;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		loadGraphic(AssetPaths.main__png, true, 24, 46);
-		animation.add("idle", [2], 1, true);
+		loadGraphic(AssetPaths.Cyborg__png, true, 24, 46);
 		animation.add("idleR", [2], 1, true);
 		animation.add("idleL", [0], 1, true);
-		animation.add("runR", [4, 5, 6, 7, 8, 9, 10], 5, true);
-		animation.add("runL", [11, 12, 13, 14, 15, 16, 17], 5, true);
+		animation.add("runR", [4, 5, 6, 7, 8, 9, 10], 10, true);
+		animation.add("runL", [11, 12, 13, 14, 15, 16, 17], 10, true);
 		animation.add("crouchR", [3], 5, true);
 		animation.add("crouchL", [1], 5, true);
+		animation.add("attackR", [18, 19, 20, 21], 10, false);
+		animation.add("attackL", [22, 23, 24, 25], 10, false);
+		animation.add("attackCR", [26, 27, 28, 29], 10, false);
+		animation.add("attackCL", [30, 31, 32, 33], 10, false);
 		VYMax       = 13   * Multiplier;
 		acceleration.y = Reg.AccGravedad;
 		health = 100;
+		runSound = new FlxSound();
+		runSound.loadEmbedded(AssetPaths.caminar__wav);
+		runSound.volume = 0.5;
 	}
 	override public function update(elapsed:Float):Void
 	{	
 		Reg.playerDirec = direc;
 		movement();	
+		Reg.playerCrouch = crouch;
+		Reg.playerSalto = salto;
 		if (!invulnerable) 
 		{
 			if (!puedeDisparar)
@@ -54,6 +62,7 @@ class Player extends FlxSprite
 			}
 			if (FlxG.keys.pressed.SPACE && laserAmmo > 0 && puedeDisparar) 
 			{
+				FlxG.sound.play(AssetPaths.disparolaser__wav);
 				Reg.laserGroup.add(new Laser(direc, x, y+20));
 				puedeDisparar = false;
 				laserAmmo--;
@@ -90,6 +99,7 @@ class Player extends FlxSprite
 	}
 	public function movement():Void
 	{
+		soundCounter++;
 		if (isTouching(FlxObject.FLOOR))
 		{
 			velocity.x = 0;		
@@ -105,6 +115,11 @@ class Player extends FlxSprite
 				velocity.x -= 100;
 			direc = false;
 			animation.play("runL");
+			if (soundCounter == 15)
+			{
+				runSound.play();
+				soundCounter = 0;
+			}
 		}
 		if (FlxG.keys.pressed.RIGHT && !salto) 
 		{
@@ -114,6 +129,11 @@ class Player extends FlxSprite
 				velocity.x += 100; 
 			direc = true;
 			animation.play("runR");
+			if (soundCounter == 15)
+			{
+				runSound.play();
+				soundCounter = 0;
+			}
 		}	
 		if (FlxG.keys.pressed.UP && FlxG.keys.pressed.RIGHT && isTouching(FlxObject.FLOOR))
 		{	
@@ -141,7 +161,24 @@ class Player extends FlxSprite
 			crouch = true;
 		else
 			crouch = false;
-		if (velocity.x == 0)
+		if (atacando)
+		{
+			if (direc)
+			{
+				if (crouch || salto)
+					animation.play("attackCR");
+				else
+					animation.play("attackR");
+			}
+			else
+			{
+				if (crouch|| salto)
+					animation.play("attackCL");
+				else
+					animation.play("attackL");
+			}
+		}
+		else if (velocity.x == 0)
 		{
 			if (direc == true) 
 			{
@@ -162,6 +199,8 @@ class Player extends FlxSprite
 			velocity.x = 0;
 		if (x > (Reg.tileWidth - width) && salto)
 			velocity.x = 0;
+		if (soundCounter == 15)
+			soundCounter = 0;
 	}
 	public function invulEffect():Void
 	{
@@ -201,6 +240,8 @@ class Player extends FlxSprite
 	{
 		contained = value;
 	}
-	
-	
+	public function atacar(value:Bool):Void
+	{	
+		atacando = value;
+	}
 }

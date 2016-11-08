@@ -166,8 +166,8 @@ class PlayState extends FlxState
 		loader.loadEntities(entityCreator, "Entities");
 		
 		
-		transportador = new FlxSprite(256, 80);
-		transportador.makeGraphic(40, 40, 0xFF991345);
+		transportador = new FlxSprite(5120, 224);
+		transportador.makeGraphic(256, 16, 0xFF991345);
 		add(transportador);
 		
 		healthBar = new FlxBar(10, 10);
@@ -180,8 +180,11 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
+		if (player.y > FlxG.stage.height)
+			player.health = 0;
 		if (player.health <= 0)
 			FlxG.switchState(new GameOverState());
+
 		super.update(elapsed);
 		spawnEntities();
 		healthBar.x = FlxG.camera.scroll.x + 5;
@@ -189,10 +192,14 @@ class PlayState extends FlxState
 		laserText.text = "Laser Ammo: " + player.getLaserAmmo();
 		Reg.playerX = player.x;
 		Reg.playerY = player.y;
-		if (FlxG.keys.justPressed.P)
-			ataque.respawn(player.getDirec());
-		else 
-			ataque.kill();	
+		if (FlxG.keys.justPressed.P && !ataque.alive)
+		{
+			FlxG.sound.play(AssetPaths.disparonormal__wav);
+			player.atacar(true);
+			ataque.revive();
+		}
+		else if (!ataque.alive)
+			player.atacar(false);
 		FlxG.collide(player, tilemap);
 		FlxG.collide(Reg.enemyGroup, tilemap);
 		FlxG.collide(enemy, tilemap);
@@ -234,16 +241,12 @@ class PlayState extends FlxState
 			enemy3.destroy();
 		if (FlxG.overlap(player, Reg.enemyGroup))
 			player.daniar();
-		//No se porque tienen que estar los dos if para que ande, no tengo idea de porque, si saco alguno deja de colisionar
-		//
-		//if (FlxG.collide(player,Reg.enemyBullets)){}
 		for (i in 0...Reg.enemyBullets.length)
 		{
 			if (FlxG.overlap(player,Reg.enemyBullets.members[i]))
 				player.daniar();
 		}
-		//
-		if (FlxG.keys.pressed.R) // nose porque crashea al darle reset :'v
+		if (FlxG.keys.pressed.R)
 			FlxG.resetState();
 			
 		if (FlxG.overlap(player, transportador))
@@ -260,7 +263,7 @@ class PlayState extends FlxState
 	private function aplasta(p:Player, v:PlatformV):Void
 	{
 		if (p.isTouching(FlxObject.CEILING))
-			p.kill();
+			p.health = 0;
 	}
 	
 	

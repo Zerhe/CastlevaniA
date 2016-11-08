@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxSubState;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flixel.system.FlxSound;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import sprites.Player;
@@ -18,6 +19,7 @@ class BossState extends FlxSubState
 	private var fondo:FlxSprite;
 	private var healthBar:FlxBar;
 	private var laserText:FlxText;
+	private var trenSound:FlxSound;
 	override public function create():Void 
 	{
 		super.create();
@@ -46,11 +48,14 @@ class BossState extends FlxSubState
 		add(healthBar);
 		laserText = new FlxText(0,20);
 		add(laserText);
+		trenSound = new FlxSound();
+		trenSound.loadEmbedded(AssetPaths.tren__wav);
+		trenSound.volume = 0.2;
 	}
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-	
+		trenSound.play();
 		healthBar.x = FlxG.camera.scroll.x + 5;
 		laserText.x = FlxG.camera.scroll.x + 5;
 		laserText.text = "Laser Ammo: " + player.getLaserAmmo();

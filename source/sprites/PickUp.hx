@@ -29,6 +29,7 @@ class PickUp extends FlxSprite
 	public function agarrar(p:Player):Void 
 	{
 		p.agarrarPickUp(tipo);
+		FlxG.sound.play(AssetPaths.powerup__wav);
 		destroy();
 	}
 }

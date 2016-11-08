@@ -7,6 +7,7 @@ import sprites.Player;
 import sprites.BaseEnemies;
 import sprites.PickUp;
 import sprites.ObjDes;
+import sprites.TheBossDrone;
 /**
  * ...
  * @author ...
@@ -22,6 +23,7 @@ class Reg
 	static public var AccGravedad:Float;/*= 700;*/
 	static public var enemyBullets:FlxTypedGroup<EnemyBullet>; /*= new FlxTypedGroup<EnemyBullet>();*/
 	static public var BossBullets:FlxTypedGroup<EnemyBullet>; /*= new FlxTypedGroup<EnemyBullet>();*/
+	static public var bossDrones:FlxTypedGroup<TheBossDrone>;
 	static public var laserGroup:FlxTypedGroup<Laser>; /*= new FlxTypedGroup<Laser>();*/
 	static public var enemyGroup:FlxTypedGroup<BaseEnemies>; /*= new FlxTypedGroup<BaseEnemies>();*/
 	static public var pickUpGroup:FlxTypedGroup<PickUp>;/*= new FlxTypedGroup<PickUp>();*/

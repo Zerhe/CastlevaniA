@@ -27,6 +27,7 @@ import sprites.Player;
 import sprites.TheBoss;
 import sprites.BaseEnemies;
 import sprites.EnemyBullet;
+import sprites.TheBossDrone;
 import sprites.Laser;
 import flixel.addons.display.FlxBackdrop;
 import flixel.FlxCamera;
@@ -106,6 +107,7 @@ class PlayState extends FlxState
 		Reg.AccGravedad = 700;
 		Reg.enemyBullets = new FlxTypedGroup<EnemyBullet>();
 		Reg.BossBullets = new FlxTypedGroup<EnemyBullet>();
+		Reg.bossDrones = new FlxTypedGroup<TheBossDrone>();
 		Reg.laserGroup = new FlxTypedGroup<Laser>();
 		Reg.enemyGroup = new FlxTypedGroup<BaseEnemies>();
 		Reg.pickUpGroup = new FlxTypedGroup<PickUp>(); 
@@ -150,6 +152,7 @@ class PlayState extends FlxState
 		add(ataque);
 		add(Reg.enemyBullets);
 		add(Reg.BossBullets);
+		add(Reg.bossDrones);
 		add(Reg.laserGroup);
 		add(Reg.objDesGroup);
 		add(Reg.pickUpGroup);
@@ -248,6 +251,9 @@ class PlayState extends FlxState
 			Reg.playerHealth = player.health;
 			Reg.laserAmmo = player.getLaserAmmo();
 			FlxG.switchState(new BossState());
+		}
+		for(i in 0...5){
+			add(Reg.BossBullets.members[i]);	
 		}
 	}
 	

@@ -29,10 +29,13 @@ class EnemyBullet extends FlxSprite
 		else 
 			return -100;
 	}
-	public function boss()
+	public function boss(velocidadX:Int)
 	{
 		makeGraphic(16, 16);
 		velocity.y = -500;
-		
+		if (velocity.x > 0)
+			velocity.x = velocidadX;
+		else if (velocity.x < 0)
+			velocity.x = -velocidadX;
 	}
 }

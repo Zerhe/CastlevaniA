@@ -22,8 +22,8 @@ class TheBoss extends FlxSprite
 	{
 		super.update(elapsed);
 		timer++;
-		//trace(timer);
-		//trace(Reg.playerDirec);	
+		trace(timer);
+		trace(Reg.playerDirec);	
 		
 		switch (timer){
 			case 200:
@@ -35,17 +35,31 @@ class TheBoss extends FlxSprite
 			}
 			case 400:
 				Reg.BossBullets.members[0] = new EnemyBullet(x + width / 2, y);
-				Reg.BossBullets.members[0].boss();
+				Reg.BossBullets.members[0].boss(50);
 				Reg.BossBullets.add(Reg.BossBullets.members[0]);
 			case 450:
-				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+				Reg.BossBullets.members[1] = new EnemyBullet(x + width / 2, y);
+				Reg.BossBullets.members[1].boss(65);
+				Reg.BossBullets.add(Reg.BossBullets.members[1]);
 			case 500:
-				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+				Reg.BossBullets.members[2] = new EnemyBullet(x + width / 2, y);
+				Reg.BossBullets.members[2].boss(80);
+				Reg.BossBullets.add(Reg.BossBullets.members[2]);
 			case 550:
-				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+				Reg.BossBullets.members[3] = new EnemyBullet(x + width / 2, y);
+				Reg.BossBullets.members[3].boss(95);
+				Reg.BossBullets.add(Reg.BossBullets.members[3]);
 			case 600:
-				Reg.BossBullets.add(new EnemyBullet(x+width/2, y));
+				Reg.BossBullets.members[4] = new EnemyBullet(x + width / 2, y);
+				Reg.BossBullets.members[4].boss(110);
+				Reg.BossBullets.add(Reg.BossBullets.members[4]);
 			case 700:
+				Reg.bossDrones.add(new TheBossDrone(x + width / 2, y - 50));
+			case 800:
+				Reg.bossDrones.add(new TheBossDrone(x + width / 2, y - 50));
+			case 900:
+				Reg.bossDrones.add(new TheBossDrone(x + width / 2, y - 50));
+			case 1000:
 				timer = 0;
 		}
 	}

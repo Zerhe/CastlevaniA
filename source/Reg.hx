@@ -22,6 +22,7 @@ class Reg
 	static public var playerCrouch:Bool;
 	static public var playerSalto:Bool;
 	static public var laserAmmo:Int;
+	static public var mejoro:Bool;
 	static public var AccGravedad:Float;/*= 700;*/
 	static public var enemyBullets:FlxTypedGroup<EnemyBullet>; /*= new FlxTypedGroup<EnemyBullet>();*/
 	static public var BossBullets:FlxTypedGroup<EnemyBullet>; /*= new FlxTypedGroup<EnemyBullet>();*/

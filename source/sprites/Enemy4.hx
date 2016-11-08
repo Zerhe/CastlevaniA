@@ -18,7 +18,9 @@ class Enemy4 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(16, 32);
+		loadGraphic(AssetPaths.Enemy4__png, true, 32, 32);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
 		acceleration.y = Reg.AccGravedad;
 		
 	}

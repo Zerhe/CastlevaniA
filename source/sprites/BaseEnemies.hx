@@ -37,5 +37,4 @@ class BaseEnemies extends FlxSprite
 	{
 		return killed;
 	}
-	
 }

@@ -14,13 +14,13 @@ class PickUp extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		tipo = FlxG.random.int(0, 3);
+		tipo = FlxG.random.int(0, 2);
 		switch(tipo)
 		{
 			case 0:
 				loadGraphic(AssetPaths.HealthPU__png, false, 10, 10);
 			case 1:
-				makeGraphic(10, 10);
+				loadGraphic(AssetPaths.pow__png, false, 10, 10);
 			case 2:
 				loadGraphic(AssetPaths.LaserPU__png, false, 10, 10);
 		}

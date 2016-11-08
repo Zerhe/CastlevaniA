@@ -88,7 +88,7 @@ class Player extends FlxSprite
 						health -= (health - 100);
 				}
 			case 1:
-				//Reg.ataque.agrandar();
+				Reg.mejoro = true;
 			case 2:
 				laserAmmo += 5;
 		}
@@ -223,11 +223,10 @@ class Player extends FlxSprite
 	{
 		if (!invulnerable)
 		{
-			health -= 5;
+			health -= 15;
 			invulnerable = true;	
 		}
 	}
-	
 	public function getLaserAmmo():Int 
 	{
 		return laserAmmo;

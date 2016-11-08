@@ -14,6 +14,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import haxe.ds.ObjectMap;
 import sprites.Ataque;
+import sprites.Ataque2;
 import sprites.Enemy1;
 import sprites.Enemy2;
 import sprites.Enemy3;
@@ -39,10 +40,6 @@ class PlayState extends FlxState
 	private var fondoTilemap:FlxTilemap;
 	private var fondo2Tilemap:FlxTilemap;
 
-	private var enemy:Enemy1;
-	private var enemy2:Enemy2;
-	private var enemy3:Enemy3;
-	private var enemy4:Enemy4;
 	private var boss:TheBoss;
 	
 	private var platGroupH:FlxTypedGroup<PlatformH>;
@@ -53,6 +50,7 @@ class PlayState extends FlxState
 	private var bossLevel:BossState;
 	
 	private var ataque:Ataque;
+	private var ataque2:Ataque2;
 	
 	private var healthBar:FlxBar;
 	private var laserText:FlxText;
@@ -112,7 +110,7 @@ class PlayState extends FlxState
 		Reg.enemyGroup = new FlxTypedGroup<BaseEnemies>();
 		Reg.pickUpGroup = new FlxTypedGroup<PickUp>(); 
 		Reg.objDesGroup	= new FlxTypedGroup<ObjDes>();	
-		
+		Reg.mejoro = true;
 		
 		
 		
@@ -133,23 +131,15 @@ class PlayState extends FlxState
 		player = new Player(32, 32);
 		add(player);
 		add(Reg.enemyGroup);
-		
-		
-		enemy = new Enemy1(200, 0);
-		add(enemy);
-		enemy2 = new Enemy2(FlxG.width, 150);
-		add(enemy2);
-		enemy3 = new Enemy3(100, 100);
-		add(enemy3);
-		enemy4 = new Enemy4(110, 100);
-		add(enemy4);
-		
+				
 		Reg.objDesGroup.add(new ObjDes(50, 100));
 		
 		boss = new TheBoss(200, 60);
 		add(boss);
 		ataque = new Ataque();
 		add(ataque);
+		ataque2 = new Ataque2();
+		add(ataque2);
 		add(Reg.enemyBullets);
 		add(Reg.BossBullets);
 		add(Reg.bossDrones);
@@ -168,6 +158,7 @@ class PlayState extends FlxState
 		
 		transportador = new FlxSprite(5120, 224);
 		transportador.makeGraphic(256, 16, 0xFF991345);
+		transportador.visible = false;
 		add(transportador);
 		
 		healthBar = new FlxBar(10, 10);
@@ -196,16 +187,16 @@ class PlayState extends FlxState
 		{
 			FlxG.sound.play(AssetPaths.disparonormal__wav);
 			player.atacar(true);
-			ataque.revive();
+			if(!Reg.mejoro)
+				ataque.revive();
+			else 
+				ataque2.revive();
 		}
-		else if (!ataque.alive)
+		else if (!ataque.alive || !ataque2.alive)
 			player.atacar(false);
 		FlxG.collide(player, tilemap);
 		FlxG.collide(Reg.enemyGroup, tilemap);
-		FlxG.collide(enemy, tilemap);
-		FlxG.collide(enemy3, tilemap);
-		FlxG.collide(enemy4, tilemap);
-		FlxG.collide(Reg.enemyBullets, tilemap);
+
 		FlxG.collide(player, platGroupH);
 		FlxG.collide(player, platGroupV, aplasta); 
 		FlxG.collide(Reg.pickUpGroup, tilemap);
@@ -225,7 +216,7 @@ class PlayState extends FlxState
 		}
 		for (i in 0...Reg.objDesGroup.length) 
 		{
-			if (FlxG.overlap(Reg.objDesGroup.members[i], ataque))
+			if (FlxG.overlap(Reg.objDesGroup.members[i], ataque) || FlxG.overlap(Reg.objDesGroup.members[i], ataque2))
 				Reg.objDesGroup.members[i].destruir();
 		}
 		for (i in 0...Reg.pickUpGroup.length) 
@@ -233,12 +224,7 @@ class PlayState extends FlxState
 			if (FlxG.overlap(Reg.pickUpGroup.members[i], player))
 				Reg.pickUpGroup.members[i].agarrar(player);
 		}
-		if (FlxG.overlap(enemy, ataque))
-			enemy.destroy();
-		if (FlxG.overlap(enemy2, ataque))
-			enemy2.destroy();
-		if (FlxG.overlap(enemy3, ataque))
-			enemy3.destroy();
+
 		if (FlxG.overlap(player, Reg.enemyGroup))
 			player.daniar();
 		for (i in 0...Reg.enemyBullets.length)

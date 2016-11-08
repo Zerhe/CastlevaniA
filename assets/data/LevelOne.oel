@@ -25,11 +25,6 @@
     <PlatformV id="6" x="4464" y="192" Counter="0" />
     <PlatformH id="1" x="1984" y="144" Counter="48" direcction="True" />
     <PlatformH id="2" x="2160" y="144" Counter="48" direcction="False" />
-    <Enemy1 id="7" x="528" y="96" />
-    <Enemy1 id="8" x="576" y="80" />
-    <Enemy2 id="9" x="688" y="48" />
-    <Enemy4 id="10" x="720" y="96" />
-    <Enemy4 id="11" x="768" y="112" />
     <ObjDes id="12" x="288" y="144" />
     <ObjDes id="13" x="624" y="80" />
     <ObjDes id="14" x="896" y="80" />
@@ -41,5 +36,66 @@
     <ObjDes id="20" x="4384" y="32" />
     <ObjDes id="21" x="4720" y="96" />
     <ObjDes id="22" x="4992" y="112" />
+    <Enemy1 id="7" x="368" y="128" />
+    <Enemy2 id="8" x="240" y="112" />
+    <Enemy2 id="9" x="288" y="96" />
+    <Enemy1 id="10" x="528" y="96" />
+    <Enemy1 id="11" x="608" y="96" />
+    <Enemy3 id="23" x="848" y="96" />
+    <Enemy2 id="24" x="1136" y="64" />
+    <Enemy2 id="25" x="1200" y="112" />
+    <Enemy2 id="26" x="1296" y="64" />
+    <Enemy4 id="27" x="1328" y="112" />
+    <Enemy1 id="28" x="1264" y="144" />
+    <Enemy1 id="29" x="1232" y="160" />
+    <Enemy3 id="30" x="1408" y="112" />
+    <Enemy3 id="31" x="1472" y="112" />
+    <Enemy2 id="32" x="1680" y="112" />
+    <Enemy2 id="33" x="1792" y="112" />
+    <Enemy3 id="34" x="2432" y="128" />
+    <Enemy1 id="35" x="2656" y="64" />
+    <Enemy1 id="36" x="2656" y="192" />
+    <Enemy1 id="37" x="2688" y="192" />
+    <Enemy1 id="38" x="2720" y="192" />
+    <Enemy4 id="39" x="2928" y="128" />
+    <Enemy4 id="40" x="2880" y="64" />
+    <Enemy3 id="41" x="3168" y="192" />
+    <Enemy2 id="42" x="3392" y="144" />
+    <Enemy2 id="43" x="3456" y="112" />
+    <Enemy4 id="44" x="3584" y="80" />
+    <Enemy1 id="46" x="3984" y="128" />
+    <Enemy1 id="47" x="3904" y="192" />
+    <Enemy2 id="48" x="3888" y="128" />
+    <Enemy2 id="49" x="3936" y="96" />
+    <Enemy4 id="50" x="4096" y="128" />
+    <Enemy4 id="51" x="4160" y="128" />
+    <Enemy2 id="52" x="4512" y="64" />
+    <Enemy2 id="53" x="4528" y="80" />
+    <Enemy2 id="54" x="4544" y="64" />
+    <Enemy2 id="55" x="4528" y="128" />
+    <Enemy2 id="56" x="4544" y="144" />
+    <Enemy2 id="57" x="4560" y="160" />
+    <Enemy3 id="58" x="4624" y="80" />
+    <Enemy3 id="59" x="4800" y="128" />
+    <Enemy1 id="60" x="5024" y="112" />
+    <Enemy4 id="61" x="5088" y="112" />
+    <Enemy2 id="62" x="4880" y="80" />
+    <Enemy2 id="63" x="4992" y="32" />
+    <Enemy2 id="64" x="5056" y="64" />
+    <Enemy2 id="65" x="4768" y="64" />
+    <Enemy2 id="66" x="4512" y="32" />
+    <Enemy2 id="67" x="4544" y="16" />
+    <Enemy2 id="68" x="4576" y="48" />
+    <Enemy2 id="69" x="4592" y="176" />
+    <Enemy2 id="70" x="4560" y="208" />
+    <Enemy2 id="71" x="4544" y="208" />
+    <Enemy2 id="72" x="4592" y="144" />
+    <Enemy2 id="73" x="4624" y="144" />
+    <Enemy2 id="74" x="4640" y="192" />
+    <Enemy2 id="75" x="4640" y="48" />
+    <Enemy2 id="76" x="4624" y="16" />
+    <Enemy2 id="77" x="4640" y="0" />
+    <Enemy2 id="78" x="4656" y="16" />
+    <Enemy4 id="45" x="3712" y="48" />
   </Entities>
 </level>

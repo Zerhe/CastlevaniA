@@ -5,7 +5,9 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flash.system.System;
 import flixel.math.FlxMath;
+import openfl.Lib;
 
 class MenuState extends FlxState
 {
@@ -24,20 +26,20 @@ class MenuState extends FlxState
 		counter = 0;
 		title = new FlxText(80, 30);
 		title.setBorderStyle(FlxTextBorderStyle.SHADOW, 0xFFFF0000);
-		title.text = "Castlevania";
-		title.scale.x = 3;
-		title.scale.y = 3;
+		title.text = "Final Destination III";
+		title.scale.x = 2;
+		title.scale.y = 2;
 		title.kill();
-		nombres = new FlxText(60,100);
+		nombres = new FlxText(80,100);
 		nombres.text = "    Lucas Abreu\n Rodrigo Amarilla\nJoaquin Liberatore";
 		nombres.scale.x = 1.4;
 		nombres.scale.y = 1.4;
 		
-		play = new FlxButton(70, 100, "Jugar");
+		play = new FlxButton(82, 120, "Jugar");
 		play.kill();
-		
-		salir = new FlxButton(70, 150, "Salir");
-		salir.kill();
+		//
+		//salir = new FlxButton(82, 170, "Salir");
+		//salir.kill();
 		
 		add(title);
 		add(nombres);
@@ -66,8 +68,7 @@ class MenuState extends FlxState
 		{
 			if (play.justReleased)
 				FlxG.switchState(new PlayState());
-			else if (salir.justReleased)
-				Sys.exit(0);
+
 		}
 	}
 }

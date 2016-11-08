@@ -1,0 +1,17 @@
+0: idle izquierda
+1: crouch izquierda
+2: idle derecha
+3: crouch derecha
+4-10: movimiento derecha (4,5,6,7,8,9,10)
+11-17: movimiento izquierda (11,12,13,14,15,16,17)
+18-21: ataque derecha (18,19,20,21) 
+NOTA: el frame 21 se debe mantener durante todo el ataque
+22-25: ataque izquierda (22,23,24,25) 25 se mantiene
+26-29: crouch ataque derecha (26,27,28,29) 29 se mantiene
+30-33: crouch ataque izquierda (30,31,32,33) 33 se mantiene
+
+
+
+ataque: es 24x8, tiene 10 frames (0,1,2,3,4,5,6,7,8,9)
+
+si el jugador esta parado, el ataque (blast) se posiciona 12 ubicaciones de y abajo del sprite del player, si el jugador esta en posicion de crouch, el ataque se posiciona 20 ubicaciones de y para abajo

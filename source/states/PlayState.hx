@@ -110,7 +110,7 @@ class PlayState extends FlxState
 		Reg.enemyGroup = new FlxTypedGroup<BaseEnemies>();
 		Reg.pickUpGroup = new FlxTypedGroup<PickUp>(); 
 		Reg.objDesGroup	= new FlxTypedGroup<ObjDes>();	
-		Reg.mejoro = true;
+		Reg.mejoro = false;
 		
 		
 		
@@ -192,7 +192,7 @@ class PlayState extends FlxState
 			else 
 				ataque2.revive();
 		}
-		else if (!ataque.alive || !ataque2.alive)
+		else if (!ataque.alive && !ataque2.alive)
 			player.atacar(false);
 		FlxG.collide(player, tilemap);
 		FlxG.collide(Reg.enemyGroup, tilemap);
@@ -203,7 +203,7 @@ class PlayState extends FlxState
 		
 		for (i in 0...Reg.enemyGroup.length) 
 		{
-			if (FlxG.overlap(Reg.enemyGroup.members[i], ataque))
+			if (FlxG.overlap(Reg.enemyGroup.members[i], ataque)|| FlxG.overlap(Reg.enemyGroup.members[i], ataque2))
 				Reg.enemyGroup.members[i].destroy();
 			for (j in 0...Reg.laserGroup.length) 
 			{

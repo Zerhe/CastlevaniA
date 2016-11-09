@@ -15,7 +15,7 @@ class Player extends FlxSprite
 	private var crouch:Bool = false;
 	private var atacando:Bool = false;
 	private var pickUp:Int = -1;
-	private var laserAmmo:Int = 3; 
+	private var laserAmmo:Int = 0; 
 	private var laserCounter:Int = 0;
 	private var puedeDisparar:Bool = true;
 	private var invulnerable:Bool = false;
